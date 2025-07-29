@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Build outputs
+dist/
+frontend/build/
+
+# Development files
+.env.development
+frontend/.env
+
+# Logs
+logs/
+*.log
+
+# Test files
+coverage/
+*.test.js
+*.test.ts
+__tests__/
+frontend/src/**/*.test.*
+
+# Documentation
+docs/
+README.md
+*.md
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Backup files
+backups/
+*.backup
+
+# Development scripts
+scripts/test-integration.js
+
+# Docker files (not needed in container)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# SSL certificates (should be mounted)
+ssl/
