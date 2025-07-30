@@ -15,16 +15,31 @@
   ],
   "routes": [
     {
+      "src": "/health",
+      "dest": "/src/index.ts"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/src/index.ts"
     },
     {
-      "src": "/(.*)",
+      "src": "/static/(.*)",
+      "dest": "/frontend/build/static/$1"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
       "dest": "/frontend/build/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/src/index.ts"
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "AUTH_ENABLED": "true",
+    "AUTH_USERNAME": "admin",
+    "AUTH_PASSWORD": "password123"
   },
   "functions": {
     "src/index.ts": {

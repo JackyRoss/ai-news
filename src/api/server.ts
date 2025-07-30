@@ -2,9 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import path from 'path';
 import { NewsCollectorService, ClassificationService, StorageService, SchedulerService } from '../services';
 import { AICategory, ApiResponse, NewsListResponse, SystemStatus } from '../types';
 import { config, getEnvironmentConfig } from '../config';
+import { basicAuth } from '../middleware/auth';
 
 /**
  * Express server for AI News Aggregator API
@@ -100,6 +102,15 @@ export class APIServer {
       res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
       next();
     });
+
+    // Add authentication middleware if enabled
+    if (process.env.AUTH_ENABLED === 'true') {
+      this.app.use(basicAuth);
+    }
+
+    // Serve static files from frontend build
+    const frontendPath = path.join(__dirname, '../../frontend/build');
+    this.app.use(express.static(frontendPath));
   }
 
   /**
@@ -140,21 +151,27 @@ export class APIServer {
     apiRouter.get('/scheduler/status', this.getSchedulerStatus.bind(this));
     
     this.app.use('/api', apiRouter);
+
+    // Catch-all handler: send back React's index.html file for any non-API routes
+    this.app.get('*', (req, res) => {
+      const frontendPath = path.join(__dirname, '../../frontend/build');
+      res.sendFile(path.join(frontendPath, 'index.html'));
+    });
   }
 
   /**
    * Setup error handling middleware
    */
   private setupErrorHandling(): void {
-    // 404 handler
-    this.app.use('*', (req, res) => {
-      const response: ApiResponse<null> = {
-        success: false,
-        error: `Route ${req.originalUrl} not found`,
-        timestamp: new Date()
-      };
-      res.status(404).json(response);
-    });
+    // Global error handler
+    this.app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+      console.error('API Error:', {
+        message: error.message,
+        stack: error.stack,
+        url: req.originalUrl,
+        method: req.method,
+        timestamp: new Date().toISOString()
+      });
 
     // Global error handler
     this.app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

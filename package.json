@@ -31,7 +31,7 @@
     "monitor:logs": "./scripts/monitor.sh logs",
     "monitor:status": "./scripts/monitor.sh status",
     "health": "./scripts/monitor.sh check",
-    "build:frontend": "cd frontend && npm run build",
+    "build:frontend": "cd frontend && NODE_ENV=production npm run build:prod",
     "build:all": "npm run build && npm run build:frontend",
     "vercel-build": "npm run build:all"
   },
