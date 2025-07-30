@@ -4,7 +4,7 @@ AIを学習したい人向けの日本語対応ニュース集約システム。
 
 ## 🌐 ライブデモ
 
-**パブリック公開版**: [https://ai-digest.vercel.app](https://ai-digest.vercel.app) *(デプロイ後に更新)*
+**パブリック公開版**: [https://ai-digest.railway.app](https://ai-digest.railway.app) *(デプロイ後に更新)*
 
 ## 🚀 機能
 
@@ -335,7 +335,7 @@ MIT License
 
 ### 🆓 無料デプロイメント（推奨）
 
-#### Vercel（完全無料）
+#### Railway（月$5クレジット）
 ```bash
 # 1. 依存関係インストール
 npm install
@@ -344,16 +344,16 @@ cd frontend && npm install && cd ..
 # 2. ビルド
 npm run build:all
 
-# 3. Vercel CLIでデプロイ
-npm install -g vercel
-vercel --prod
+# 3. Railway CLIでデプロイ
+npm install -g @railway/cli
+railway deploy
 ```
 
 #### 自動デプロイスクリプト
 ```bash
 # 簡単デプロイ
 chmod +x deploy.sh
-./deploy.sh vercel
+./deploy.sh railway
 ```
 
 ### 🐳 Docker デプロイメント
@@ -379,7 +379,6 @@ DATA_RETENTION_DAYS=7
 ```
 
 #### 必要なファイル
-- `vercel.json` - Vercel設定
 - `.env.production` - 本番環境変数
 - `Dockerfile` - Docker設定
 - `deploy.sh` - デプロイスクリプト
@@ -388,21 +387,20 @@ DATA_RETENTION_DAYS=7
 
 ```bash
 # ヘルスチェック
-curl https://your-app.vercel.app/health
+curl https://your-app.railway.app/health
 
 # API動作確認
-curl https://your-app.vercel.app/api/news
+curl https://your-app.railway.app/api/news
 
 # フロントエンド確認
-curl https://your-app.vercel.app
+curl https://your-app.railway.app
 ```
 
 ### 📊 無料プラン制限
 
 | プラットフォーム | 制限 | コスト |
 |---|---|---|
-| **Vercel** | 100GB帯域幅/月 | **完全無料** ✅ |
-| Railway | $5クレジット/月 | 月$5 💰 |
+| **Railway** | $5クレジット/月 | 月$5 💰 |
 | Render | 750時間/月 | 無料 ✅ |
 
 ### 📚 詳細ガイド
@@ -415,4 +413,4 @@ curl https://your-app.vercel.app
 
 これで世界中からアクセス可能なAIニュースアグリゲーターが完成しました！
 
-**🔗 デプロイ後のURL例**: `https://ai-digest.vercel.app`
+**🔗 デプロイ後のURL例**: `https://ai-digest.railway.app`

@@ -37,19 +37,17 @@ cd ..
 echo "🔍 Verifying build..."
 node test-api-config.js
 
-# Deploy to Vercel with force flag
-echo "🌐 Deploying to Vercel (force clean)..."
+# Deploy to Railway with force flag
+echo "🌐 Deploying to Railway (force clean)..."
 
-# Install Vercel CLI if needed
-if ! command -v vercel &> /dev/null; then
-  echo "📦 Installing Vercel CLI..."
-  npm install -g vercel
+# Install Railway CLI if needed
+if ! command -v railway &> /dev/null; then
+  echo "📦 Installing Railway CLI..."
+  npm install -g @railway/cli
 fi
 
 # Force deployment with clean cache
-vercel --prod --force \
-  --env NODE_ENV=production \
-  --env AUTH_ENABLED=true \
+railway deploy
   --env AUTH_USERNAME=admin \
   --env AUTH_PASSWORD=password123 \
   --env CORS_ORIGIN=* \
