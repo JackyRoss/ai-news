@@ -172,16 +172,6 @@ export class APIServer {
         method: req.method,
         timestamp: new Date().toISOString()
       });
-
-    // Global error handler
-    this.app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-      console.error('API Error:', {
-        message: error.message,
-        stack: error.stack,
-        url: req.originalUrl,
-        method: req.method,
-        timestamp: new Date().toISOString()
-      });
       
       // Determine error type and status code
       let statusCode = 500;

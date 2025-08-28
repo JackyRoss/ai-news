@@ -32,8 +32,7 @@
     "monitor:status": "./scripts/monitor.sh status",
     "health": "./scripts/monitor.sh check",
     "build:frontend": "cd frontend && NODE_ENV=production npm run build:prod",
-    "build:all": "npm run build && npm run build:frontend",
-
+    "build:all": "npm run build && npm run build:frontend"
   },
   "keywords": [
     "ai",

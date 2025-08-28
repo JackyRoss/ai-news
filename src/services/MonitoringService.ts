@@ -533,7 +533,7 @@ export class MonitoringService {
    */
   getSystemMetrics(): SystemMetrics | null {
     return this.systemMetricsHistory.length > 0 
-      ? this.systemMetricsHistory[this.systemMetricsHistory.length - 1] 
+      ? (this.systemMetricsHistory[this.systemMetricsHistory.length - 1] ?? null)
       : null;
   }
 
