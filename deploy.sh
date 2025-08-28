@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # AIダイジェスト デプロイメントスクリプト
-# Usage: ./deploy.sh [vercel|railway|render|docker]
+# Usage: ./deploy.sh [railway|render|docker]
 
 set -e
 
-DEPLOYMENT_TYPE=${1:-vercel}
+DEPLOYMENT_TYPE=${1:-docker}
 PROJECT_NAME="ai-news-aggregator"
 
 echo "🚀 AIダイジェスト デプロイメント開始..."
@@ -21,18 +21,6 @@ echo "🏗️  アプリケーションをビルド中..."
 npm run build:all
 
 case $DEPLOYMENT_TYPE in
-  "vercel")
-    echo "🌐 Vercelにデプロイ中..."
-    # Vercel CLIがインストールされているか確認
-    if ! command -v vercel &> /dev/null; then
-      echo "📦 Vercel CLIをインストール中..."
-      npm install -g vercel
-    fi
-    # デプロイ実行
-    vercel --prod
-    echo "✅ Vercelデプロイ完了！"
-    echo "🔗 URL: https://$PROJECT_NAME.vercel.app"
-    ;;
   "railway")
     echo "🚂 Railwayにデプロイ中..."
     
@@ -81,7 +69,7 @@ case $DEPLOYMENT_TYPE in
     
   *)
     echo "❌ 不明なデプロイメントタイプ: $DEPLOYMENT_TYPE"
-    echo "使用可能なオプション: vercel, railway, render, docker"
+    echo "使用可能なオプション: railway, render, docker"
     exit 1
     ;;
 esac
