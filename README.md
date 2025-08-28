@@ -4,7 +4,7 @@ AIを学習したい人向けの日本語対応ニュース集約システム。
 
 ## 🌐 ライブデモ
 
-**パブリック公開版**: [https://ai-digest.railway.app](https://ai-digest.railway.app) *(デプロイ後に更新)*
+**パブリック公開版**: [https://ai-digest.railway.app](https://ai-digest.railway.app) _(デプロイ後に更新)_
 
 ## 🚀 機能
 
@@ -21,11 +21,13 @@ AIを学習したい人向けの日本語対応ニュース集約システム。
 ## 📋 システム要件
 
 ### 開発環境
+
 - Node.js 18.x 以上
 - npm 8.x 以上
 - TypeScript 5.x
 
 ### 本番環境
+
 - Docker & Docker Compose
 - 最低 512MB RAM
 - 1GB ディスク容量
@@ -35,12 +37,14 @@ AIを学習したい人向けの日本語対応ニュース集約システム。
 ### 開発環境
 
 1. **リポジトリのクローン**
+
 ```bash
 git clone <repository-url>
 cd ai-news-aggregator
 ```
 
 2. **依存関係のインストール**
+
 ```bash
 # バックエンド
 npm install
@@ -52,6 +56,7 @@ cd ..
 ```
 
 3. **環境変数の設定**
+
 ```bash
 # バックエンド環境変数をコピー
 cp .env.development .env
@@ -63,6 +68,7 @@ cp frontend/.env frontend/.env.local
 4. **開発サーバーの起動**
 
 **方法1: 個別起動（推奨）**
+
 ```bash
 # ターミナル1: バックエンド起動 (ポート 3001)
 npm run dev
@@ -73,6 +79,7 @@ npm start
 ```
 
 **方法2: 統合起動コマンド**
+
 ```bash
 # 両方を同時に起動（Windows）
 npm run start:all
@@ -83,12 +90,14 @@ npm run start:frontend   # フロントエンドのみ
 ```
 
 5. **アクセス**
+
 - **フロントエンド**: http://localhost:3000 （メインのポータル画面）
 - **バックエンドAPI**: http://localhost:3001/api
 - **ヘルスチェック**: http://localhost:3001/health
 - **システム状態**: http://localhost:3001/api/status
 
 6. **初回起動時の確認**
+
 ```bash
 # バックエンドの動作確認
 curl http://localhost:3001/health
@@ -103,6 +112,7 @@ curl -X POST http://localhost:3001/api/collect
 ### 本番環境 (Docker)
 
 1. **環境変数の設定**
+
 ```bash
 # 本番環境用の設定を編集
 nano .env.production
@@ -110,6 +120,7 @@ nano frontend/.env.production
 ```
 
 2. **Docker Composeでの起動**
+
 ```bash
 # ビルドと起動
 docker-compose up -d
@@ -119,6 +130,7 @@ docker-compose logs -f
 ```
 
 3. **SSL証明書の設定** (オプション)
+
 ```bash
 # SSL証明書を配置
 mkdir ssl
@@ -130,6 +142,7 @@ mkdir ssl
 ### 環境変数
 
 #### バックエンド (.env.production)
+
 ```env
 NODE_ENV=production
 PORT=3001
@@ -141,6 +154,7 @@ NEWS_RETENTION_DAYS=14
 ```
 
 #### フロントエンド (frontend/.env.production)
+
 ```env
 REACT_APP_API_URL=https://your-api-domain.com
 REACT_APP_ENV=production
@@ -176,6 +190,7 @@ REACT_APP_ENABLE_DEBUG=false
 ## 📡 API エンドポイント
 
 ### ニュース取得
+
 ```http
 GET /api/news
 GET /api/news?category=AIモデル
@@ -184,22 +199,26 @@ GET /api/news?startDate=2024-01-01&endDate=2024-12-31
 ```
 
 ### カテゴリ情報
+
 ```http
 GET /api/categories
 ```
 
 ### システム状態
+
 ```http
 GET /api/status
 GET /api/scheduler/status
 ```
 
 ### 手動収集
+
 ```http
 POST /api/collect
 ```
 
 ### スケジューラー制御
+
 ```http
 POST /api/scheduler/start
 POST /api/scheduler/stop
@@ -208,17 +227,20 @@ POST /api/scheduler/stop
 ## 🧪 テスト
 
 ### ユニットテスト
+
 ```bash
 npm test
 npm run test:watch
 ```
 
 ### 統合テスト
+
 ```bash
 npm run test:integration
 ```
 
 ### フルシステムテスト
+
 ```bash
 node scripts/test-integration.js
 ```
@@ -226,16 +248,19 @@ node scripts/test-integration.js
 ## 📊 監視とログ
 
 ### ログファイル
+
 - `logs/combined.log` - 全ログ
 - `logs/error.log` - エラーログ
 - `logs/performance.log` - パフォーマンスログ
 
 ### ヘルスチェック
+
 ```bash
 curl http://localhost:3001/health
 ```
 
 ### システム状態確認
+
 ```bash
 curl http://localhost:3001/api/status
 ```
@@ -243,6 +268,7 @@ curl http://localhost:3001/api/status
 ## 🚀 デプロイ
 
 ### Docker Compose (推奨)
+
 ```bash
 # 本番環境での起動
 docker-compose -f docker-compose.yml up -d
@@ -252,6 +278,7 @@ docker-compose up -d --scale ai-news-aggregator=2
 ```
 
 ### 手動デプロイ
+
 ```bash
 # ビルド
 npm run build:prod
@@ -286,6 +313,7 @@ npm run start:prod
    - フロントエンドのAPIエンドポイント設定を確認
 
 ### ログレベル調整
+
 ```env
 LOG_LEVEL=debug  # 詳細ログ
 LOG_LEVEL=info   # 標準ログ
@@ -296,6 +324,7 @@ LOG_LEVEL=error  # エラーのみ
 ## 🤝 開発に参加
 
 ### 開発フロー
+
 1. Issue作成
 2. Feature branchの作成
 3. 実装とテスト
@@ -304,6 +333,7 @@ LOG_LEVEL=error  # エラーのみ
 6. マージ
 
 ### コーディング規約
+
 - ESLint + Prettier使用
 - TypeScript strict mode
 - テストカバレッジ80%以上
@@ -321,6 +351,7 @@ MIT License
 ## 🔄 更新履歴
 
 ### v1.0.0
+
 - 初回リリース
 - 基本的なニュース収集・分類機能
 - REST API提供
@@ -330,12 +361,15 @@ MIT License
 ---
 
 **注意**: 本番環境では必ず適切なSSL証明書を設定し、環境変数を適切に設定してください。
+
 ##
- 🌐 パブリック公開・デプロイメント
+
+🌐 パブリック公開・デプロイメント
 
 ### 🆓 無料デプロイメント（推奨）
 
 #### Railway（月$5クレジット）
+
 ```bash
 # 1. 依存関係インストール
 npm install
@@ -350,6 +384,7 @@ railway deploy
 ```
 
 #### 自動デプロイスクリプト
+
 ```bash
 # 簡単デプロイ
 chmod +x deploy.sh
@@ -357,6 +392,7 @@ chmod +x deploy.sh
 ```
 
 ### 🐳 Docker デプロイメント
+
 ```bash
 # Dockerイメージビルド
 docker build -t ai-news-aggregator .
@@ -368,6 +404,7 @@ docker run -d -p 3001:3001 --name ai-news-aggregator ai-news-aggregator
 ### 📋 デプロイメント設定
 
 #### 環境変数（本番環境）
+
 ```bash
 NODE_ENV=production
 PORT=3001
@@ -379,6 +416,7 @@ DATA_RETENTION_DAYS=7
 ```
 
 #### 必要なファイル
+
 - `.env.production` - 本番環境変数
 - `Dockerfile` - Docker設定
 - `deploy.sh` - デプロイスクリプト
@@ -398,10 +436,10 @@ curl https://your-app.railway.app
 
 ### 📊 無料プラン制限
 
-| プラットフォーム | 制限 | コスト |
-|---|---|---|
-| **Railway** | $5クレジット/月 | 月$5 💰 |
-| Render | 750時間/月 | 無料 ✅ |
+| プラットフォーム | 制限            | コスト  |
+| ---------------- | --------------- | ------- |
+| **Railway**      | $5クレジット/月 | 月$5 💰 |
+| Render           | 750時間/月      | 無料 ✅ |
 
 ### 📚 詳細ガイド
 
