@@ -33,7 +33,7 @@
     "health": "./scripts/monitor.sh check",
     "build:frontend": "cd frontend && NODE_ENV=production npm run build:prod",
     "build:all": "npm run build && npm run build:frontend",
-
+    "vercel-build": "npm run build"
   },
   "keywords": [
     "ai",
